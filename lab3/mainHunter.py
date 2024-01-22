@@ -11,7 +11,7 @@ NUM_OF_BOIDS = 50
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Boids")
+pygame.display.set_caption("Hunting Boids")
 
 running = True
 clock = pygame.time.Clock()

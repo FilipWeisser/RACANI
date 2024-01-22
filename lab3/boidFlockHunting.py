@@ -4,13 +4,13 @@ import pygame
 import math
 
 
-visual_range=40*4
+visual_range=40*3
 protected_range=8*4
 centering_factor=0.0005
 matching_factor=0.05
 avoid_factor=0.05*2
 turn_factor=0.2*3
-turn_margin=100
+turn_margin=100*2
 minspeed = 5
 maxspeed = 8
 hunterspeed = 9

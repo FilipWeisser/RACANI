@@ -3,7 +3,7 @@ import math
 import pygame
 
 visual_range=40*2
-protected_range=8*7
+protected_range=8*4
 centering_factor=0.0005
 matching_factor=0.05
 avoid_factor=0.05
