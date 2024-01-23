@@ -5,8 +5,8 @@ import pygame
 WIDTH, HEIGHT = 1000.0, 800.0
 BOID_COLOR = (0, 0, 255)
 BOID_SIZE = WIDTH / 40
-TELEPORT = False
-NUM_OF_BOIDS = 30
+TELEPORT = 0
+NUM_OF_BOIDS = 50
 
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -16,7 +16,7 @@ running = True
 clock = pygame.time.Clock()
 
 
-flock = BoidFlock(50, WIDTH, HEIGHT, TELEPORT, BOID_SIZE, BOID_COLOR)
+flock = BoidFlock(NUM_OF_BOIDS, WIDTH, HEIGHT, TELEPORT, BOID_SIZE, BOID_COLOR)
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:

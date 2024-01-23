@@ -2,7 +2,7 @@ from boidFlockHunting import BoidFlockHunting
 import pygame
 
 
-WIDTH, HEIGHT = 1000.0, 800.0
+WIDTH, HEIGHT = 1000.0, 1000.0
 BOID_COLOR = (0, 0, 255)
 HUNTER_COLOR = (255, 0, 0)
 BOID_SIZE = WIDTH / 40
@@ -17,7 +17,7 @@ running = True
 clock = pygame.time.Clock()
 
 
-flock = BoidFlockHunting(50, WIDTH, HEIGHT, TELEPORT, BOID_SIZE, BOID_COLOR, HUNTER_COLOR)
+flock = BoidFlockHunting(NUM_OF_BOIDS, WIDTH, HEIGHT, TELEPORT, BOID_SIZE, BOID_COLOR, HUNTER_COLOR)
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:

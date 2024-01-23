@@ -4,7 +4,7 @@ import pygame
 import math
 
 
-visual_range=40*3
+visual_range=40*4
 protected_range=8*4
 centering_factor=0.0005
 matching_factor=0.05
@@ -13,7 +13,7 @@ turn_factor=0.2*3
 turn_margin=100*2
 minspeed = 5
 maxspeed = 8
-hunterspeed = 9
+hunter_speed = 9
 caught_distance = 10
 
 
@@ -95,6 +95,7 @@ class BoidFlockHunting(BoidFlock):
             elif boid.x<turn_margin:
                 boid.vx = boid.vx + turn_factor
 
+        # Velocity magnitude set in between minspeed and maxspeed
         magnitude = math.sqrt(boid.vx**2 + boid.vy**2)
         boid.vx = boid.vx / magnitude
         boid.vy = boid.vy / magnitude
@@ -109,11 +110,11 @@ class BoidFlockHunting(BoidFlock):
             
 
     def calculate_hunter_velocity(self, hunter : Boid):
-        min_distance = self.WIDTH
+        min_distance = self.WIDTH+self.HEIGHT
         closest_boid = None
         for boid2 in self.boids:
             if not boid2.hunter:
-                # Compute differences in x and y coordinates
+                # Find min distance
                 dx = hunter.x - boid2.x
                 dy = hunter.y - boid2.y
                 if self.teleport:
@@ -123,19 +124,22 @@ class BoidFlockHunting(BoidFlock):
                 if distance < min_distance:
                     min_distance=distance
                     closest_boid = boid2
+        
         if not closest_boid:
             hunter.vx=hunter.vy=0
             return
+        
         if min_distance < caught_distance:
             closest_boid.hunter = True
             closest_boid.freeze = 30
             hunter.hunter = False
-            
+        
+        # Velocity magnitude
         hunter.vx += 0.1*(closest_boid.x-hunter.x)
         hunter.vy += 0.1*(closest_boid.y-hunter.y)
         magnitude = math.sqrt(hunter.vx**2 + hunter.vy**2)
-        hunter.vx = hunter.vx / magnitude * hunterspeed
-        hunter.vy = hunter.vy / magnitude * hunterspeed
+        hunter.vx = hunter.vx / magnitude * hunter_speed
+        hunter.vy = hunter.vy / magnitude * hunter_speed
 
 
     def update(self):
@@ -152,7 +156,7 @@ class BoidFlockHunting(BoidFlock):
             boid.x += boid.vx
             boid.y += boid.vy
 
-            if self.teleport:    
+            if self.teleport: # Teleport on the other side
                 if boid.x < 0:
                     boid.x = self.WIDTH
                 elif boid.x > self.WIDTH:
